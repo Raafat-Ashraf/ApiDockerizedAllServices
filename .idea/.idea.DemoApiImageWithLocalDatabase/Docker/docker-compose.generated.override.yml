@@ -1,0 +1,24 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  demoapiimagewithlocaldatabase.api:
+    build:
+      context: "E:\\.Net\\.Net Advanced Topics\\Netcode-Hub\\Connect .NET 8 Web API\
+        \ in Docker to Local SQL Server\\DemoApiImageWithLocalDatabase"
+      dockerfile: "DemoApiImageWithLocalDatabase.Api/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/DemoApiImageWithLocalDatabase.Api.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "demoapiimagewithlocaldatabase.api:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\raafa\\.nuget\\packages:/home/app/.nuget/packages"
+    - "E:\\.Net\\.Net Advanced Topics\\Netcode-Hub\\Connect .NET 8 Web API in Docker\
+      \ to Local SQL Server\\DemoApiImageWithLocalDatabase\\DemoApiImageWithLocalDatabase.Api:/app:rw"
+    - "E:\\.Net\\.Net Advanced Topics\\Netcode-Hub\\Connect .NET 8 Web API in Docker\
+      \ to Local SQL Server\\DemoApiImageWithLocalDatabase:/src:rw"
+    working_dir: "/app"

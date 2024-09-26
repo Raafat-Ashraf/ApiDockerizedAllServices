@@ -1,0 +1,54 @@
+﻿services:
+  webapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: netcodehub/localapi:v1
+    container_name: webapi
+    depends_on:
+      - store_database
+      - redis-stack-local
+      - redis-commander
+    ports:
+      - "7000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - my_network
+  store_database:
+    container_name: store_database_local
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 8001:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=P@ssword
+      - MSSQL_PID=Express
+    networks:
+      - my_network
+  redis-stack-local:
+    image: redis:latest
+    container_name: cache
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - my_network
+
+  redis-commander:
+      image: rediscommander/redis-commander:latest
+      container_name: redis-commander
+      restart: always
+      ports:
+        - "8082:8081"
+      environment:
+        - REDIS_HOSTS=local:redis-stack-local:6379
+      depends_on:
+        - redis-stack-local
+      networks:
+        - my_network
+
+
+networks:
+    my_network:
+      driver: bridge

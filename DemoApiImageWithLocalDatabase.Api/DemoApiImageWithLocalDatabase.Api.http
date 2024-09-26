@@ -1,0 +1,6 @@
+@DemoApiImageWithLocalDatabase.Api_HostAddress = http://localhost:5190
+
+GET {{DemoApiImageWithLocalDatabase.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
